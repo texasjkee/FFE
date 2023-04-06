@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const data = require('./data/db.js');
+const data = require('./dataBase/states.js');
 
 const PORT = 3333;
 
