@@ -1,13 +1,14 @@
 const express = require('express');
 const route = require('./router/route.js');
-const app = express();
+const server = express();
 
 const PORT = 3333;
 
+
 const path = require('path');
 
-app.use(route);
+server.use(route);
 
-app.listen(PORT, err => {
+server.listen(PORT, err => {
   console.log(`Server running on ${PORT}`);
 });
