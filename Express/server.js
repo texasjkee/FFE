@@ -4,7 +4,6 @@ const server = express();
 
 const PORT = 3333;
 
-
 const path = require('path');
 
 server.use(route);
