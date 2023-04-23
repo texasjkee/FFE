@@ -26,3 +26,31 @@ body {
   height: 70px;
   background-color: black;
 }
+
+.header-wrapper {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.header-menu {
+  color: #fff; 
+}
+
+.header__logo {
+  color: #fff; 
+  display: flex;
+  align-items: end;
+}
+
+.header__logo-svg {
+  display: flex;
+  align-items: end;
+}
+
+.header__catalog {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: end; */
+}
