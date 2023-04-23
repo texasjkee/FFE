@@ -19,12 +19,14 @@ ul {
 
 body {
   background-color: white;
+  font-family: Arial;
 }
 
+/* HEADER */
 .header {
   max-width: 1400px;
   height: 70px;
-  background-color: black;
+  background-color: #221f1f;
 }
 
 .header-wrapper {
@@ -53,4 +55,85 @@ body {
   display: flex;
   justify-content: space-between;
   /* align-items: end; */
+}
+
+/* MAIN_CONTENT */
+.rzk__product__top {
+  max-width: 1400px;   
+  height: 120px;
+  background-color: aqua;
+}
+
+.rzk__product__navbar {
+  max-width: 1400px;   
+  height: 220px;
+  background-color: green;
+}
+
+.rzk__product__tab-main {
+  max-width: 1400px;  
+  height: 720px;
+  background-color: rgb(139, 104, 104);
+}
+
+/* FOOTER */
+footer {
+  max-width: 100%;  
+  background-color: #d3eedf;
+}
+
+.footer-stores {
+  background-color: #00a046;
+  padding: 20px;
+}
+
+.footer-stores-wrapper {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-stores__heading {
+  width: 1075px;  
+  height: 18px;
+  padding-top: 10px;
+  font-size: 20px; 
+  text-align: center;
+  color: #fff;
+}
+
+.footer-stores__buttons {
+  width: 264px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px; 
+}
+
+.footer-top {
+  background-color: #fff;
+  max-width: 1800px;
+  padding: 24px 20px 0 20px;
+  height: 200px;
+  display: flex;
+}
+
+.footer-top__social {
+  color: #3e77aa;
+  width: 300px;  
+}
+
+.footer-top__links {
+  width: 1000px;
+  display: flex;
+  color: #3e77aa;
+  justify-content: space-between;
+}
+
+.footer-bottom {
+  background-color: #fff;
+  display: flex;
+  font-size: 12px;
+  padding: 30px 20px 30px 20px;      
+  justify-content: space-between;
 }
