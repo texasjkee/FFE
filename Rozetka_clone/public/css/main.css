@@ -104,12 +104,68 @@ body {
 
 .rzk__product__tab-main {
   max-width: 1400px;  
-  height: 720px;
+  /* height: 720px; */
+}
+
+.product-about-top {
+  display: flex;
+}
+
+.product-purchase {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.product-before-date {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.product-seller {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.product-delivery {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.product-payment {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.product-guarantee {
+  width: 700px;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
 }
 
 .product-about {
   display: flex;
   justify-content: space-between;
+}
+
+.product-about-bottom {
+  display: flex; 
+}
+.product-about-bottom__left {
+  width: 700px; 
+}
+.product-about-bottom__right-title {
+
+}
+.product-about-bottom__right-form {
+
+}
+.stat-rating {
+  display: flex;
 }
 /* FOOTER */
 footer {
