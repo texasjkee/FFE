@@ -9,4 +9,4 @@ const fs = require('fs');
   await fs.promises.writeFile('./example.txt', content, err => console.log(err))
 })();
 
-console.log('End')
+console.log('End');
