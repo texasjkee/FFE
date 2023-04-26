@@ -1,4 +1,5 @@
 const products = require('../dataBase/products');
+
 module.exports = {
   filterProducts: (weight, country) => {
     const foundProduct = 
