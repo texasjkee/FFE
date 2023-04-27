@@ -9,4 +9,6 @@ const fs = require('fs');
   await fs.promises.writeFile('./example.txt', content, err => console.log(err))
 })();
 
+//It's not commit
+
 console.log('End')
