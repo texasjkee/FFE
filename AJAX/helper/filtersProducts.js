@@ -1,12 +1,10 @@
 const products = require('../dataBase/products');
 
 module.exports = {
-  filterProducts: (weight, country) => {
-    const foundProduct = 
-      products.filter(product => product.country === country)
-        .filter(product => product.weight === weight);
-
-    return foundProduct;
-  },
+  filterByPrice : (min, max) => {
+    const foundProducts = products
+      .filter(product => product.price >= min)
+      .filter(product => product.price <= max);
+    return foundProducts
+  }
 };
-

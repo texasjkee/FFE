@@ -1,15 +1,15 @@
 const express = require('express');
 const route = express.Router();
 
-const {filterProducts} = require('../helper/filtersProducts');
+const { filterByPrice } = require('../helper/filtersProducts');
 
 route.get('/products?', (req, res) => {
-  const weight = Number(req.query.sortByWeight);
-  const country = req.query.country;
-
-  if(weight && country) {
+  const min = +req.query.min;
+  const max = +req.query.max;
+  console.log(min, max)
+  if(min && max) {
     res.json({
-      message: filterProducts(weight, country)
+      message: filterByPrice(min, max)
     })
   } else {
     res.json({
