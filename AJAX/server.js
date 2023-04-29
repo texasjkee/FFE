@@ -5,6 +5,7 @@ const productRoute = require('./router/products');
 
 const PORT = 3333;
 
+server.use(express.json())
 server.use(express.static('public'));
 
 server.set('view engine', 'ejs');

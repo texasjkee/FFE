@@ -18,4 +18,8 @@ route.get('/products?', (req, res) => {
   }
 })
 
+route.post('/products?', (req, res) => {
+  console.log(req.body)
+  res.json({message: req.body})
+})
 module.exports = route;
