@@ -1,19 +1,39 @@
-const createList = (title) => {
-  const div = document.createElement('div');   
-  div.classList.add('product__list-item')
-  div.textContent = title;
-  const body = document.body
-  body.append(div);
+const createPost = (title, body) => {
+  const lay = document.querySelector('.append');
+
+  const titlePost = document.createElement('div');   
+  titlePost.classList.add('title-product');
+  titlePost.textContent = title;
+
+  const bodyPost = document.createElement('div');   
+  bodyPost.classList.add('body-product');
+  bodyPost.textContent = body;
+
+  lay.append(titlePost);
+  lay.append(bodyPost);
+}
+
+const showPost = () => {
+  const titlePosts = document.querySelectorAll('.title-product');
+
+  const changeVisable = () => {
+    const bodyPostClass = document.querySelector('.body-product');
+    bodyPostClass.classList.toggle('show')  
+  }
+
+  titlePosts.forEach(post => {
+    post.addEventListener('click', changeVisable);
+  })
 }
 
 const getPostTitleValue = () => {
   const value = document.querySelector('.post-title__input').value;
-  console.log(value); 
+  // console.log(value); 
 }
 
 const getPostBodyValue = () => {
   const value = document.querySelector('.post-body__input').value;
-  console.log(value);  
+  // console.log(value);  
 }
 
 const titleValue = document.querySelector('.post-title__input').value;
@@ -29,15 +49,17 @@ const run = async () => {
     { params: 
       {
         title: getPostTitleValue(),
-        body: 'Body'
+        body: getPostTitleValue()      
       } 
     }
   )
-  createList(result.data.message.params.title);
-  console.log(result.data.message.params);
+  const titlePost =  result.data.message.params.title;
+  const bodyPost = result.data.message.params.body;
+  createPost(titlePost, bodyPost);
 }
 
 const postButton = document.querySelector('.post-button');
 const refreshButton = document.querySelector('.refresh');
+
 postButton.addEventListener('click', run);
-refreshButton.addEventListener('click', getPostTitleValue);
+postButton.addEventListener('click', showPost);

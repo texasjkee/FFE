@@ -1,3 +1,28 @@
-h1{
-  color: blue;
+.content {
+  background-color: rgb(68, 150, 68);
+  width: 1350px;
+}
+.post-body__input {
+  font-size: 20px;
+}
+
+.title-product {
+  border: 1px solid black ;  
+  width: 200px;
+  background-color: aqua;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.body-product {
+  display: none;
+  border: 1px solid black ;  
+  width: 500px;
+  background-color: aqua;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.show {
+  display: block;
 }
