@@ -58,8 +58,7 @@ const run = async () => {
   createPost(titlePost, bodyPost);
 }
 
-const postButton = document.querySelector('.post-button');
-const refreshButton = document.querySelector('.refresh');
+const savePostButton = document.querySelector('.save-post__button');
 
-postButton.addEventListener('click', run);
-postButton.addEventListener('click', showPost);
+savePostButton.addEventListener('click', run);
+savePostButton.addEventListener('click', showPost);
