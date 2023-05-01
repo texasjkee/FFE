@@ -1,13 +1,13 @@
 const express = require('express');
 const server = express();
 
-const productRoute = require('./router/products');
+const productRoute = require('./router/post');
 
 const PORT = 3333;
 
 server.use(express.json())
 server.use(express.static('public'));
-// server.use(express.urlencoded({ extended: true }));
+server.use(express.urlencoded({ extended: true }));
 // TO_DO: Why is this needed?
 
 server.set('view engine', 'ejs');

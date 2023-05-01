@@ -16,20 +16,14 @@ const createPost = (title, body) => {
   bodyPost.textContent = body;
 
   lay.append(titlePost);
-  lay.append(bodyPost);
+  titlePost.append(bodyPost);
+
+  titlePost.addEventListener('click', changeVisable)
 }
 
-const showPost = () => {
-  const titlePosts = document.querySelectorAll('.title-product');
-
-  const changeVisable = () => {
-    const bodyPostClass = document.querySelector('.body-product');
-    bodyPostClass.classList.toggle('show')  
-  }
-
-  titlePosts.forEach(post => {
-    post.addEventListener('click', changeVisable);
-  })
+function changeVisable () {
+  const bodyPostTest = this.childNodes[1];
+  bodyPostTest.classList.toggle('show')  
 }
 
 //Controller
@@ -41,11 +35,10 @@ const run = async (e) => {
     body: bodyPost.value
   }
 
-  const result = await axios.post('/products?', { params: post});
+  const result = await axios.post('/posts?', { params: post});
 
   createPost(post.title, post.body);
 }
 
 //Runer
 savePostButton.addEventListener('click', run);
-savePostButton.addEventListener('click', showPost);
