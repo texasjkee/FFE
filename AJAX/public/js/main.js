@@ -26,19 +26,11 @@ const showPost = () => {
   })
 }
 
-const getPostTitleValue = () => {
-  const value = document.querySelector('.post-title__input').value;
-  // console.log(value); 
-}
+const title = document.querySelector('.post-title');
+const body = document.querySelector('.post-body');
 
-const getPostBodyValue = () => {
-  const value = document.querySelector('.post-body__input').value;
-  // console.log(value);  
-}
-
-const titleValue = document.querySelector('.post-title__input').value;
- 
-const run = async () => {
+const run = async (e) => {
+  e.preventDefault();
   const result = await axios.post('/products?',
     // {params: 
     //   {
@@ -48,11 +40,12 @@ const run = async () => {
     // }
     { params: 
       {
-        title: getPostTitleValue(),
-        body: getPostTitleValue()      
+        title: title.value,
+        body: body.value
       } 
     }
   )
+
   const titlePost =  result.data.message.params.title;
   const bodyPost = result.data.message.params.body;
   createPost(titlePost, bodyPost);

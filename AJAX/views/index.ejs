@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js" integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+    integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Document</title>
 </head>
+
 <body>
   <div class="content">
-     <div class="posts">
+    <div class="posts">
       <div class="posts-wrapper">
         <div class="append"></div>
-        <div class="post-title">
-          <span>Title</span>
-          <input class="post-title__input" type="text" value="title">
-        </div>
-        <div class="post-body">
-          <textarea class="post-body__input" value="body" rows="8" cols="80"></textarea>
-        </div>
-        <button class="save-post__button">Save</button>
+        <form id="post-form">
+          <div class="form-info">
+            <label>Post Title
+              <input type="text" name="title" class="post-title">
+            </label>
+          </div>
+          <div class="form-text">
+            <label>Post Text
+              <textarea name="text" class="post-body"></textarea>
+            </label>
+          </div>
+          <div class="form-button">
+            <input type="submit" class="save-post__button"  value="Save">
+          </div>
+        </form>
       </div>
-     </div>
     </div>
   </div>
   <script src="/js/main.js"></script>
