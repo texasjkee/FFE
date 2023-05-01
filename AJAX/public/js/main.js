@@ -1,3 +1,9 @@
+//Get UI 
+const titlePost = document.querySelector('.post-title');
+const bodyPost = document.querySelector('.post-body');
+const savePostButton = document.querySelector('.save-post__button');
+
+//Render
 const createPost = (title, body) => {
   const lay = document.querySelector('.append');
 
@@ -26,32 +32,20 @@ const showPost = () => {
   })
 }
 
-const title = document.querySelector('.post-title');
-const body = document.querySelector('.post-body');
-
+//Controller
 const run = async (e) => {
   e.preventDefault();
-  const result = await axios.post('/products?',
-    // {params: 
-    //   {
-    //     title: 'post#1',
-    //     body: 'test'
-    //   } 
-    // }
-    { params: 
-      {
-        title: title.value,
-        body: body.value
-      } 
-    }
-  )
 
-  const titlePost =  result.data.message.params.title;
-  const bodyPost = result.data.message.params.body;
-  createPost(titlePost, bodyPost);
+  const post = {
+    title: titlePost.value,
+    body: bodyPost.value
+  }
+
+  const result = await axios.post('/products?', { params: post});
+
+  createPost(post.title, post.body);
 }
 
-const savePostButton = document.querySelector('.save-post__button');
-
+//Runer
 savePostButton.addEventListener('click', run);
 savePostButton.addEventListener('click', showPost);
