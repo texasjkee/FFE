@@ -3,68 +3,29 @@ const titlePost = document.querySelector('.post-title');
 const bodyPost = document.querySelector('.post-body');
 const savePostButton = document.querySelector('.save-post__button');
 const searchInput = document.querySelector('.search-input');
+const hashtags = document.querySelectorAll('.hashtag-list__iteam');
 
-//Data base
-const arr = 
-[
-  {
-    title: 'Post#1',
-    descriptions: 'Bla bla bla', 
-    hashtag: 'security',
-  },
-  {
-    title: 'Post#2',
-    descriptions: 'Bla bla bla', 
-    hashtag: 'psychology',
-  },
-  {
-    title: 'Post#3',
-    descriptions: 'Cooking nyam nyam nyam', 
-    hashtag: 'cooking',
-  },
-  {
-    title: 'Post#4',
-    descriptions: 'Biology it is sience ', 
-    hashtag: 'biology',
-  },
-  {
-    title: 'Post#5',
-    descriptions: 'Genetic it', 
-    hashtag: 'biology',
-  },
-  {
-    title: 'Post#6',
-    descriptions: 'Bla bla bla', 
-    hashtag: 'biogoo',
-  },
-];
+let selectedHashtag;
+let searchValue;
 
-const findPost = (e) => {
-  const searchValue = e.target.value.toLowerCase();
-  
-  const foundPost = arr.filter(post => post.hashtag === searchValue);
-
-  foundPost.forEach(post => {
-    createPost(post.title, post.descriptions);
-  })
+const deleteActiveOfOther = () => {
+  hashtags.forEach(hashtag => hashtag.classList.remove('active-tag'));
 }
 
-//Render
-const createPost = (title, body) => {
-  const lay = document.querySelector('.append');
+const clearPostValue = () => {
+  titlePost.value = null;
+  bodyPost.value = null;
 
-  const titlePost = document.createElement('div');   
-  titlePost.classList.add('title-product');
-  titlePost.textContent = title;
+  deleteActiveOfOther();
+}
 
-  const bodyPost = document.createElement('div');   
-  bodyPost.classList.add('body-product');
-  bodyPost.textContent = body;
+function changeCurrentActive () {
+  deleteActiveOfOther();
+  this.classList.toggle('active-tag');
+}
 
-  lay.append(titlePost);
-  titlePost.append(bodyPost);
-
-  titlePost.addEventListener('click', changeVisable)
+function takeHashtagText () {
+  selectedHashtag = this.textContent.replace(/^./, ""); 
 }
 
 function changeVisable () {
@@ -72,28 +33,97 @@ function changeVisable () {
   bodyPostTest.classList.toggle('show')  
 }
 
+function showTags () {
+  const lay = document.querySelector('.append');
+
+  lay.childNodes.forEach(post => {
+    if(post.lastChild.textContent === searchInput.value) {
+      post.classList.remove('hidden');
+      post.classList.add('show');
+    }
+  })
+}
+
+//Render
+const createPost = (title, body, hashtag) => {
+  const lay = document.querySelector('.append');
+
+  const postWrapper = document.createElement('div');   
+  postWrapper.classList.add('post-wrapper');
+
+  const titlePost = document.createElement('div');   
+  titlePost.classList.add('title-post');
+  titlePost.textContent = title;
+
+  const bodyPost = document.createElement('div');   
+  bodyPost.classList.add('body-post');
+  bodyPost.textContent = body;
+
+  const hashtagOfTitle = document.createElement('div');   
+  hashtagOfTitle.classList.add('hashtag-list');
+  hashtagOfTitle.textContent = hashtag;
+  
+  lay.append(postWrapper);
+  postWrapper.appendChild(titlePost);
+  postWrapper.appendChild(hashtagOfTitle);
+  titlePost.append(bodyPost);
+
+  titlePost.addEventListener('click', changeVisable)
+}
+
+const hideList = (e) => {
+  const eClick = e.type === 'click'; 
+  const eBackspace = e.key === 'Backspace';
+
+  const lay = document.querySelector('.append');
+
+  if(eClick || eBackspace) {
+    lay.childNodes.forEach(post => {
+      post.classList.add('hidden')
+    })
+  }
+}
+
 //Controller
 const run = async (e) => {
   e.preventDefault();
 
+  //TO_DO: Try to get it out.
   const post = {
     id: +new Date(),
     title: titlePost.value,
     body: bodyPost.value,
-    hashtag: 'hashtag',
+    hashtag: selectedHashtag,
   }
 
-  const result = await axios.post('/posts?', { params: post});
+  if(post.title && post.body) {
+    const result = await axios.post('/posts?', {post});
 
-  const resTitle = result.data.message.title;
-  const resBody = result.data.message.title;
+    const resTitle = result.data.message.title;
+    const resBody = result.data.message.body;
+    const resHashtag = result.data.message.hashtag
 
-  console.log(result.data.message)
-  createPost(resTitle, resBody);
+    createPost(resTitle, resBody, resHashtag,'axios');
+  }
+
+  if(searchValue) {
+    const resultFilter = await axios.post('/filter?', {filter: searchValue});
+    showTags();
+  }
 }
 
-//Runer
+const findPost = (e) => {
+  searchValue = e.target.value.toLowerCase();
+  run(e);
+}
+
+hashtags.forEach(hashtag => hashtag.addEventListener('click', changeCurrentActive));
+hashtags.forEach(hashtag => hashtag.addEventListener('click', takeHashtagText));
+
+searchInput.addEventListener('click', (e) => hideList(e));
+searchInput.addEventListener('keyup', (e) => hideList(e));
+searchInput.addEventListener('keyup', (e) => findPost(e));
+
+//Runner
 savePostButton.addEventListener('click', run);
-searchInput.addEventListener('keyup', (e) => {
-  findPost(e);
-});
+savePostButton.addEventListener('click', clearPostValue);

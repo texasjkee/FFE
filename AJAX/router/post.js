@@ -4,14 +4,22 @@ const route = express.Router();
 const dataBase = [];
 
 route.post('/posts?', (req, res) => {
-  if(req.body.params.title) {
-    dataBase.push(req.body.params);
+  const postValue = req.body.post;
 
-    console.log(dataBase);
-    const foundPost = dataBase.find(post => post.title === req.body.params.title);
+  if(postValue?.title) {
+    dataBase.push(req.body.post);
+    //TO_DO: 2 similar titles;??? 
+    const foundPost = dataBase.find(post => post.title === req.body.post.title);
 
-    res.json({message: foundPost})
+    res.json({message: foundPost});
   }
+})
+
+route.post('/filter?', (req, res) => {
+  const filterValue = req.body.filter;
+  const foundPostByHashtag = dataBase.find(post => post.hashtag === filterValue);
+
+  res.json({message: foundPostByHashtag});
 })
 
 module.exports = route;
