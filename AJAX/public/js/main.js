@@ -117,6 +117,16 @@ const findPost = (e) => {
   run(e);
 }
 
+//TO_DO: Finish debounce function.
+// const debounce = (func, waitTime) => {
+//   let timeout;
+
+//   return () => {
+//     clearTimeout(timeout);
+//     timeout = setTimeout(func, waitTime)
+//   }
+// }
+
 hashtags.forEach(hashtag => hashtag.addEventListener('click', changeCurrentActive));
 hashtags.forEach(hashtag => hashtag.addEventListener('click', takeHashtagText));
 
