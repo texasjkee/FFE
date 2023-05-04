@@ -71,18 +71,25 @@ textarea {
 
 .body-post {
   display: none;
+  margin-top: 10px;
+  padding: 10px;
   border: 1px solid #ccc;  
   border-radius: 2px;
-  width: 200px;
+  width: 440px;
   min-height: 70px;
   background-color: #fff;
-  padding: 5px;
 }
 
 .hashtag-list {
   display: flex;
   list-style: none;
   border-bottom: 5px solid transparent;
+}
+
+.hashtag-list__post {
+  /* background-color: aqua;  */
+  /* width: 150px; */
+  color: #019863;
 }
 
 .hashtag-list__iteam {
@@ -92,7 +99,6 @@ textarea {
 .hashtag-list__iteam:hover {
   cursor: pointer;
   color: #019863;
-
 }
 
 .active {
@@ -138,19 +144,21 @@ textarea {
 
 .hashtag-list__iteam:hover {
   cursor: pointer;
-  color: green;
+  color: #028658;
 }
 
 .post-wrapper {
   display: flex;
-  width: 200px;
+  justify-content: space-between;
+  width: 450px;
   padding: 4px 20px 0 20px;
   border-bottom: 2px solid #f2f1f1;
   margin-bottom: 5px;
 }
 
 .post-wrapper:hover {
-  background-color: #f4e9e9;
+  color: #058b5cc1;
+  cursor: pointer;
 }
 
 .save-post__button {
@@ -178,6 +186,7 @@ textarea {
 }
 
 .active-tag {
+  padding: 2px;
   border: 1px solid black;
   border-radius: 2px;
   background-color: #019863;
@@ -193,6 +202,7 @@ textarea {
 
 .show {
   display: block;
+  color: black;
 }
 
 .hidden {
