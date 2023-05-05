@@ -30,10 +30,10 @@ const dataBase = [
 
 route.post('/posts?', (req, res) => {
   const postValue = req.body.post;
+  const postWithoutTag= postValue.hashtag ? postValue : postValue.hashtag = null; 
 
-  console.log(dataBase)
   if(postValue?.title) {
-    dataBase.push(req.body.post);
+    dataBase.push(postValue);
     //TO_DO: 2 similar titles;??? 
     const foundPost = dataBase.find(post => post.title === req.body.post.title);
 

@@ -28,6 +28,11 @@ function takeHashtagText () {
   selectedHashtag = this.textContent.replace(/^./, ""); 
 }
 
+function changeVisable () {
+  const bodyPostTest = this.childNodes[1];
+  bodyPostTest.classList.toggle('show')  
+}
+
 const removeList = (e) => {
   const eClick = e.type === 'click'; 
   const eBackspace = e.key === 'Backspace';
@@ -61,7 +66,7 @@ const createPost = (post) => {
 
   const hashtagOfTitle = document.createElement('div');   
   hashtagOfTitle.classList.add('hashtag-list__post');
-  hashtagOfTitle.textContent = `#${post.hashtag}`;
+  hashtagOfTitle.textContent =  post.hashtag ? `#${post.hashtag}` : '';
   
   lay.append(postWrapper);
   postWrapper.appendChild(titlePost);
@@ -92,11 +97,15 @@ const addPost = async (e) => {
 }
 
 const searchPost = async () => {
-  const result = await axios.post('/filter?', {filter: searchInput.value});
+  let validValue;
+
+  if(searchInput.value !== 'null') validValue = searchInput.value;
+
+  const result = await axios.post('/filter?', {filter: validValue});
 
   if(result.data.message) {
     result.data.message.forEach(post => {
-      createPost(post.title, post.body, post.hashtag);
+      createPost(post);
     })
   }
 }
@@ -126,10 +135,6 @@ savePostButton.addEventListener('click', clearPostValue);
 //TEST!!!
 //=============================================================================
 
-// function changeVisable () {
-//   const bodyPostTest = this.childNodes[1];
-//   bodyPostTest.classList.toggle('show')  
-// }
 
 // const hideList = (e) => {
 //   const eClick = e.type === 'click'; 
