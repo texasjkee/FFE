@@ -33,15 +33,34 @@ function changeVisable () {
   bodyPostTest.classList.toggle('show')  
 }
 
-function showTags () {
+const hideList = (e) => {
+  const eClick = e.type === 'click'; 
+  const eBackspace = e.key === 'Backspace';
+
   const lay = document.querySelector('.append');
 
-  lay.childNodes.forEach(post => {
-    if(post.lastChild.textContent === searchInput.value) {
-      post.classList.remove('hidden');
-      post.classList.add('show');
-    }
-  })
+  if(eClick || eBackspace) {
+    lay.childNodes.forEach(post => {
+      post.classList.add('hidden')
+    })
+  }
+}
+
+const removeList = (e) => {
+  const eClick = e.type === 'click'; 
+  const eBackspace = e.key === 'Backspace';
+
+  if(eClick || eBackspace) {
+    const list = document.querySelector('.append');
+    console.log(  list.childNodes)
+    
+    //TO_DO: Delete only one children
+    list.childNodes.forEach(child => {
+      console.log(child)
+      list.lastChild.remove() 
+    })
+    // list.childNodes.forEach(child => console.log(child));
+  }
 }
 
 //Render
@@ -60,8 +79,8 @@ const createPost = (title, body, hashtag) => {
   bodyPost.textContent = body;
 
   const hashtagOfTitle = document.createElement('div');   
-  hashtagOfTitle.classList.add('hashtag-list');
-  hashtagOfTitle.textContent = hashtag;
+  hashtagOfTitle.classList.add('hashtag-list__post');
+  hashtagOfTitle.textContent = `#${hashtag}`;
   
   lay.append(postWrapper);
   postWrapper.appendChild(titlePost);
@@ -71,21 +90,8 @@ const createPost = (title, body, hashtag) => {
   titlePost.addEventListener('click', changeVisable)
 }
 
-const hideList = (e) => {
-  const eClick = e.type === 'click'; 
-  const eBackspace = e.key === 'Backspace';
-
-  const lay = document.querySelector('.append');
-
-  if(eClick || eBackspace) {
-    lay.childNodes.forEach(post => {
-      post.classList.add('hidden')
-    })
-  }
-}
-
 //Controller
-const run = async (e) => {
+const addPost = async (e) => {
   e.preventDefault();
 
   //TO_DO: Try to get it out.
@@ -101,39 +107,70 @@ const run = async (e) => {
 
     const resTitle = result.data.message.title;
     const resBody = result.data.message.body;
-    const resHashtag = result.data.message.hashtag
+    const resHashtag = result.data.message.hashtag;
 
-    createPost(resTitle, resBody, resHashtag,'axios');
-  }
-
-  if(searchValue) {
-    const resultFilter = await axios.post('/filter?', {filter: searchValue});
-    showTags();
+    createPost(resTitle, resBody, resHashtag);
   }
 }
 
-const findPost = (e) => {
-  searchValue = e.target.value.toLowerCase();
-  run(e);
+const searchPost = async (e) => {
+  const result = await axios.post('/filter?', {filter: searchInput.value});
+
+  if(result.data.message) {
+    result.data.message.forEach(post => {
+      console.log(post,'post');
+      createPost(post.title, post.body, post.hashtag);
+    })
+  }
 }
 
-//TO_DO: Finish debounce function.
-// const debounce = (func, waitTime) => {
-//   let timeout;
+const debounce = (func, waitTime) => {
+  let timeout;
 
-//   return () => {
-//     clearTimeout(timeout);
-//     timeout = setTimeout(func, waitTime)
-//   }
-// }
+  return () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(func, waitTime)
+  }
+}
 
 hashtags.forEach(hashtag => hashtag.addEventListener('click', changeCurrentActive));
 hashtags.forEach(hashtag => hashtag.addEventListener('click', takeHashtagText));
 
-searchInput.addEventListener('click', (e) => hideList(e));
-searchInput.addEventListener('keyup', (e) => hideList(e));
-searchInput.addEventListener('keyup', (e) => findPost(e));
+searchInput.addEventListener('keyup', debounce(searchPost, 650));
+searchInput.addEventListener('keyup', (e) => removeList(e));
+searchInput.addEventListener('click', (e) => removeList(e));
 
-//Runner
-savePostButton.addEventListener('click', run);
+savePostButton.addEventListener('click', addPost);
 savePostButton.addEventListener('click', clearPostValue);
+
+//TO_DO: Why debounce doesn't working in arrow func? example:
+// searchInput.addEventListener('keyup', (e) => debounce(funcHi, 500));
+
+
+
+//TEST!!!
+//=============================================================================
+
+// searchInput.addEventListener('keyup', (e) => hideList(e));
+// searchInput.addEventListener('click', (e) => hideList(e));
+// searchInput.addEventListener('keyup', (e) => findPost(e));
+
+// const findPost = (e) => {
+//   searchValue = e.target.value.toLowerCase();
+//   addPost(e);
+// }
+
+
+// function showTags () {
+//   const lay = document.querySelector('.append');
+//   console.log(searchInput.value)
+
+//   lay.childNodes.forEach(post => {
+//     const tagWithoutSimb = post.lastChild.textContent.replace(/^./, ""); 
+
+//     if(tagWithoutSimb === searchInput.value.toLowerCase()) {
+//       post.classList.remove('hidden');
+//       post.classList.add('show');
+//     }
+//   })
+// }
