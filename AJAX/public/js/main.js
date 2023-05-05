@@ -28,33 +28,14 @@ function takeHashtagText () {
   selectedHashtag = this.textContent.replace(/^./, ""); 
 }
 
-function changeVisable () {
-  const bodyPostTest = this.childNodes[1];
-  bodyPostTest.classList.toggle('show')  
-}
-
-const hideList = (e) => {
-  const eClick = e.type === 'click'; 
-  const eBackspace = e.key === 'Backspace';
-
-  const lay = document.querySelector('.append');
-
-  if(eClick || eBackspace) {
-    lay.childNodes.forEach(post => {
-      post.classList.add('hidden')
-    })
-  }
-}
-
 const removeList = (e) => {
   const eClick = e.type === 'click'; 
   const eBackspace = e.key === 'Backspace';
 
   if(eClick || eBackspace) {
     const list = document.querySelector('.append');
-    console.log(  list.childNodes)
     
-    //TO_DO: Delete only one children
+    //TO_DO: Delete only one children, why?
     list.childNodes.forEach(child => {
       console.log(child)
       list.lastChild.remove() 
@@ -64,7 +45,7 @@ const removeList = (e) => {
 }
 
 //Render
-const createPost = (title, body, hashtag) => {
+const createPost = (post) => {
   const lay = document.querySelector('.append');
 
   const postWrapper = document.createElement('div');   
@@ -72,15 +53,15 @@ const createPost = (title, body, hashtag) => {
 
   const titlePost = document.createElement('div');   
   titlePost.classList.add('title-post');
-  titlePost.textContent = title;
+  titlePost.textContent = post.title;
 
   const bodyPost = document.createElement('div');   
   bodyPost.classList.add('body-post');
-  bodyPost.textContent = body;
+  bodyPost.textContent = post.body;
 
   const hashtagOfTitle = document.createElement('div');   
   hashtagOfTitle.classList.add('hashtag-list__post');
-  hashtagOfTitle.textContent = `#${hashtag}`;
+  hashtagOfTitle.textContent = `#${post.hashtag}`;
   
   lay.append(postWrapper);
   postWrapper.appendChild(titlePost);
@@ -95,30 +76,26 @@ const addPost = async (e) => {
   e.preventDefault();
 
   //TO_DO: Try to get it out.
-  const post = {
+  const postModel = {
     id: +new Date(),
     title: titlePost.value,
     body: bodyPost.value,
     hashtag: selectedHashtag,
   }
 
-  if(post.title && post.body) {
-    const result = await axios.post('/posts?', {post});
+  if(postModel.title && postModel.body) {
+    const result = await axios.post('/posts?', {post: postModel});
 
-    const resTitle = result.data.message.title;
-    const resBody = result.data.message.body;
-    const resHashtag = result.data.message.hashtag;
-
-    createPost(resTitle, resBody, resHashtag);
+    const foundPost = result.data.message; 
+    createPost(foundPost);
   }
 }
 
-const searchPost = async (e) => {
+const searchPost = async () => {
   const result = await axios.post('/filter?', {filter: searchInput.value});
 
   if(result.data.message) {
     result.data.message.forEach(post => {
-      console.log(post,'post');
       createPost(post.title, post.body, post.hashtag);
     })
   }
@@ -146,11 +123,26 @@ savePostButton.addEventListener('click', clearPostValue);
 //TO_DO: Why debounce doesn't working in arrow func? example:
 // searchInput.addEventListener('keyup', (e) => debounce(funcHi, 500));
 
-
-
 //TEST!!!
 //=============================================================================
 
+// function changeVisable () {
+//   const bodyPostTest = this.childNodes[1];
+//   bodyPostTest.classList.toggle('show')  
+// }
+
+// const hideList = (e) => {
+//   const eClick = e.type === 'click'; 
+//   const eBackspace = e.key === 'Backspace';
+
+//   const lay = document.querySelector('.append');
+
+//   if(eClick || eBackspace) {
+//     lay.childNodes.forEach(post => {
+//       post.classList.add('hidden')
+//     })
+//   }
+// }
 // searchInput.addEventListener('keyup', (e) => hideList(e));
 // searchInput.addEventListener('click', (e) => hideList(e));
 // searchInput.addEventListener('keyup', (e) => findPost(e));
@@ -159,7 +151,6 @@ savePostButton.addEventListener('click', clearPostValue);
 //   searchValue = e.target.value.toLowerCase();
 //   addPost(e);
 // }
-
 
 // function showTags () {
 //   const lay = document.querySelector('.append');
