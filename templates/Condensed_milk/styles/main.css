@@ -1,0 +1,60 @@
+.container{
+  border: 2px solid black;
+}
+
+header {
+	background-color:  #33ccff;
+	font-size: 20px;
+	text-align: center;
+	color: #fff;
+	padding: 10px;
+	border-bottom: 10px #ffff00 solid;
+	margin-bottom: 10px;
+}	
+
+h3{ 
+	color: #bb3535;
+	font-family: Arial;
+}
+
+span {
+	font-family: Arial;
+}
+
+.logo-wrapper {
+	background-color: #0000cc;
+	border-bottom: 10px #ccc solid;
+}
+
+.logo {
+	display: block;
+	margin: auto;
+}
+
+.medal-wrapper {
+	background-color: #ffff00;
+  padding-right: 20px;
+	border-bottom: 10px #ccc solid;
+}
+
+.medal-img{
+	display: block;
+	margin-left: auto;
+}	
+
+.procent-fat {
+	text-align: right;
+	color: #fff;
+}
+
+.netto-weight {
+	color: #fff;
+	position: absolute;
+}
+
+footer {
+  padding: 50px 20px 30px 30px;
+	background-color: #0000cc;
+	font-size: 20px;
+	margin-top: 20px;
+}
