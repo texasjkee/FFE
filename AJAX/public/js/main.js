@@ -1,7 +1,7 @@
 //Get UI 
 const titlePost = document.querySelector('.post-title');
 const bodyPost = document.querySelector('.post-body');
-const savePostButton = document.querySelector('.save-post__button');
+const saveButton = document.querySelector('.save-post__button');
 const searchInput = document.querySelector('.search-input');
 const hashtags = document.querySelectorAll('.hashtag-list__iteam');
 
@@ -15,7 +15,6 @@ const deleteActiveOfOther = () => {
 const clearPostValue = () => {
   titlePost.value = null;
   bodyPost.value = null;
-
   deleteActiveOfOther();
 }
 
@@ -34,24 +33,18 @@ function changeVisable () {
 }
 
 const removeList = (e) => {
-  const eClick = e.type === 'click'; 
-  const eBackspace = e.key === 'Backspace';
+  const _click = e.type === 'click'; 
+  const _backspace = e.key === 'Backspace';
 
-  if (eClick || eBackspace) {
-    const list = document.querySelector('.append');
-    
-    //TO_DO: Delete only one children, why?
-    list.childNodes.forEach(child => {
-      console.log(child)
-      list.lastChild.remove() 
-    })
-    // list.childNodes.forEach(child => console.log(child));
+  if (_click || _backspace) {
+    const allPosts = document.querySelectorAll('.post-wrapper');
+    allPosts.forEach(post => post.remove());
   }
 }
 
 //Render
 const createPost = (post) => {
-  const lay = document.querySelector('.append');
+  const lay = document.querySelector('.invisibleDiv');
 
   const postWrapper = document.createElement('div');   
   postWrapper.classList.add('post-wrapper');
@@ -122,5 +115,5 @@ searchInput.addEventListener('keyup', debounce(searchPost, 650));
 searchInput.addEventListener('keyup', (e) => removeList(e));
 searchInput.addEventListener('click', (e) => removeList(e));
 
-savePostButton.addEventListener('click', addPost);
-savePostButton.addEventListener('click', clearPostValue);
+saveButton.addEventListener('click', addPost);
+saveButton.addEventListener('click', clearPostValue);
