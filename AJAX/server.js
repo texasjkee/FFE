@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 
-const productRoute = require('./router/post');
+const postRoute = require('./router/postRoute');
 const formRoute = require('./router/formRoute');
 
 const PORT = 3333;
@@ -22,7 +22,7 @@ server.get('/form',(req, res) => {
   res.render('form');
 })
 
-server.use(productRoute);
+server.use(postRoute);
 server.use(formRoute);
 
 server.listen(PORT, () => {
