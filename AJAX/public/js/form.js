@@ -1,21 +1,21 @@
-//Get UI
-const form = document.querySelector('#form');
+const {form} = document.forms;
+const addButton = document.getElementById('add');
 
-const data = {
-  name: 'John',
-  surname: 'Smit',
-  cardNumber: 1234567890123456,
-  cvv: 122,
-  cardCode: 231
-}
-
-//Controller
 const addFormData = async (e) => {
   e.preventDefault();
 
-  const result = await axios.post('/form', { data });
-  console.log(result.data.message);
+  const formData= new FormData(form);
+  const values = Object.fromEntries(formData.entries());
+
+  const result = await axios.post('/form?', {data: values})
+  console.log(result.data.status);
+  result.data.errors.forEach(err => console.log(err));
 };
 
-//Runner
+const clearFormInputs = () => {
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(input => input.value = '');
+}
+
 form.addEventListener('submit',addFormData);
+addButton.addEventListener('click',clearFormInputs);

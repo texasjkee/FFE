@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 
 const productRoute = require('./router/post');
+const formRoute = require('./router/formRoute');
 
 const PORT = 3333;
 
@@ -17,7 +18,12 @@ server.get('/',(req, res) => {
   res.render('index');
 })
 
+server.get('/form',(req, res) => {
+  res.render('form');
+})
+
 server.use(productRoute);
+server.use(formRoute);
 
 server.listen(PORT, () => {
   console.log(`Listening on ${PORT} port`)

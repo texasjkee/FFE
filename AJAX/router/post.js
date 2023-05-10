@@ -31,7 +31,7 @@ const dataBase = [
 route.post('/posts?', (req, res) => {
   const postValue = req.body.post;
   const postWithoutTag= postValue.hashtag ? postValue : postValue.hashtag = null; 
-
+  
   if(postValue?.title) {
     dataBase.push(postValue);
     //TO_DO: 2 similar titles;??? 
