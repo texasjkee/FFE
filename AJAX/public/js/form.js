@@ -1,5 +1,10 @@
-const {form} = document.forms;
+const { form } = document.forms;
 const addButton = document.getElementById('add');
+
+const clearFormInputs = () => {
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(input => input.value = '');
+}
 
 const addFormData = async (e) => {
   e.preventDefault();
@@ -8,14 +13,17 @@ const addFormData = async (e) => {
   const values = Object.fromEntries(formData.entries());
 
   const result = await axios.post('/form?', {data: values})
-  console.log(result.data.status);
-  result.data.errors.forEach(err => console.log(err));
+  const status = result.data.status;
+
+  console.log('Server status:', status);
+  
+  if (status === 200) {
+    console.log('No errors');
+  } else {
+    result.data.errors.forEach(err => console.log(err.message));
+  }
+  
+  clearFormInputs();
 };
 
-const clearFormInputs = () => {
-  const inputs = document.querySelectorAll('input');
-  inputs.forEach(input => input.value = '');
-}
-
 form.addEventListener('submit',addFormData);
-addButton.addEventListener('click',clearFormInputs);

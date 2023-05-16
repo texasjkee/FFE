@@ -16,12 +16,27 @@
 <body>
   <div class="container">
     <form action="" id="form">
-      name:<input type="text" name="name">
-      surname:<input type="text" name="surname">
-      card number:<input type="text" name="cardNumber">
-      cvv:<input type="text" name="cvv">
-      card code:<input type="text" name="cardCode">
-      <button id="add" type="submit">Add</button>
+      <div class="form__item">
+        <span>Name:</span> 
+        <input type="text" placeholder="Your name..." name="name">
+      </div>
+      <div class="form__item">
+        <span>Surname:</span> 
+        <input type="text" placeholder="Your surname..." name="surname">
+      </div>
+      <div class="form__item">
+        <span>Card number:</span> 
+        <input type="number" placeholder="0000-0000-0000-0000" name="cardNumber">
+      </div>
+      <div class="form__item">
+        <span>CVV:</span> <input type="number" name="cvv">
+      </div>
+      <div class="form__item">
+        <span>Card code:</span> <input type="number" name="cardCode">
+      </div>
+      <div class="form__item">
+        <button id="add" type="submit">Add</button>
+      </div>
     </form>
   </div>
   <script src="/js/form.js"></script>
