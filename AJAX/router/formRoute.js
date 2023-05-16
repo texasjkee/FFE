@@ -12,6 +12,7 @@ const schema = {
       cardNumber: {type: 'string', pattern: '^[0-9]{16}$'},
       cvv: {type: 'string', pattern: '^[0-9]{3}$'},
       cardCode: {type: 'string', pattern: '^[0-9]{3}$'},
+      //Try without string;
     },
     required: ['name', 'surname', 'cardNumber', 'cvv', 'cardCode'],
     additionalProperties: false,
@@ -20,6 +21,8 @@ const schema = {
 route.post('/form', (req, res) => {
   const validate = ajv.compile(schema);
   const valid = validate(req.body.data);
+  
+  console.log(req.body);
 
   if (!valid) {
     return res.json({status: 500, errors: validate.errors})
