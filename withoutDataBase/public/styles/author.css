@@ -1,0 +1,11 @@
+.posts-wrapper {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-wrapper {
+  margin-top: 20px; 
+}
