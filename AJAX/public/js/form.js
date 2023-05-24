@@ -11,7 +11,7 @@ const addFormData = async (e) => {
 
   const formData= new FormData(form);
   const values = Object.fromEntries(formData.entries());
-
+  
   const result = await axios.post('/form?', {data: values})
   const status = result.data.status;
 

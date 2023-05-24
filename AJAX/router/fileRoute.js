@@ -5,7 +5,11 @@ const route = Router();
 
 route.post('/file', upload.single('file'), (req, res) => {
 
-  res.end('File upload');
+  if (req.file) {
+    res.json({message: 'Everything is fine'})
+  } else {
+    res.json({message: 'It is not txt'})
+  }
 });
 
 module.exports = route;

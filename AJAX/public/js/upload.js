@@ -6,7 +6,7 @@ const addFormData = async (e) => {
   const inputFiles = document.getElementById('myFile').files;
 
   const formData = new FormData();
-  
+ 
   formData.append('file', inputFiles[0]);
   
   //TO_DO: Don't need it.
@@ -17,6 +17,7 @@ const addFormData = async (e) => {
   // }
   
   const result = await axios.post('/file?', formData);
+  console.log(result.data.message)
 };
 
 form.addEventListener('submit',addFormData);

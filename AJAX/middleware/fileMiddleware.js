@@ -6,20 +6,24 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename(req, file, cb) {
-    // cb(null, new Date().toISOString() + '-' + file.originalname)
-    // cb(null, Date.now() + path.extname(file.originalname))
     cb(null, file.originalname + '-' + Date.now());
   }
 });
 
-// const limits = {
-//   fileSize:
-// }
+const limits = {
+  fileSize: 4000
+}
 
-// const fileFilter = (req, rile, cb) => {
-//   if(file.minetype === 'image/png' || 'image/jep) {
+const fileFilter = (req, file, cb) => {
+  const txt = 'text/plain';
 
-//   }
-// }
+  if(file.mimetype === txt) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+    //TO_DO: Error always blocks the thread;
+    // cb(new Error(`This ${file.originalname} does not txt`))
+  }
+}
 
-module.exports = multer({ storage });
+module.exports = multer({ storage , fileFilter});
