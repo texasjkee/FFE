@@ -19,28 +19,37 @@
         <form id="arcticle-form">
           <div class="form-info">
             <label>
-              <input class="post-title" type="text" name="title" placeholder="Name article" >
+              <input class="article-title" type="text" name="title" placeholder="Name article">
             </label>
           </div>
           <div class="form-text">
             <label>
-              <textarea class="post-body" name="text" cols="40" rows="5" placeholder="Text article" ></textarea>
+              <textarea class="article-body" placeholder="Text article"></textarea>
             </label>
           </div>
-          <input type="submit" class="save-article__button"  value="Save">
-          <input type="text" class="search-author">
+          <select id="authors">
+            <!-- <option value="Oda">chose Autor</option> -->
+          </select>
+          <input type="submit" class="save-article__button" value="Save">
           <div class="invisibleDiv"></div>
-          <!-- <div class="form-button">
-          </div> -->
         </form>
-        <ul>
-          <li><a href="http://localhost:3333/author">Author</a></li>
-          <li><a href="http://localhost:3333/article">Article</a></li>
-          <li><a href="http://localhost:3333/viewArticle">ViewArticle</a></li>
-        </ul>
       </div>
     </div>
   </div>
+  <nav class="navigation">
+    <ul class="author__list">
+      <li class="author__list-item ">
+        <a href="http://localhost:3333/author">Authors</a>
+      </li>
+      <li class="author__list-item ">
+        <a href="http://localhost:3333/article">Add article</a>
+      </li>
+      <li class="author__list-item ">
+        <a href="http://localhost:3333/viewArticle">View Article</a>
+      </li>
+    </ul>
+  </nav>
   <script type="module" src="/js/article.js"></script>
 </body>
+
 </html>
