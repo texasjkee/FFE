@@ -13,7 +13,6 @@ exports.createNewArticle = async (req, res, next) => {
 exports.getAllArticles = async (req, res, next) => {
     try{
         const authors = await articleModel.find({});
-        console.log(authors);
         res.status(200).json(authors);
     } catch (error) {
         console.log(error);

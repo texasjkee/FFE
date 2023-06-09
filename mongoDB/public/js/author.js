@@ -1,8 +1,10 @@
-const authorInput = document.querySelector('.author-input'); 
-const addAthorButton = document.querySelector('.add-author'); 
+const UI = {
+  AUTHOR_INPUT: document.querySelector('.author-input'),  
+  AUTHOR_BTN: document.querySelector('.add-author') 
+};
 
 const clearValue = () => {
-  authorInput.value = null;
+  UI.AUTHOR_INPUT.value = null;
 };
 
 const renderAuthor = (author) => {
@@ -20,12 +22,11 @@ const renderAuthor = (author) => {
 })();
 
 const addAuthor = async () => {
-  const author = authorInput.value;
-
+  const author = UI.AUTHOR_INPUT.value;
   const result = await axios.post('/author', {name: author})
   renderAuthor(result.data.name);
 
   clearValue();
 }
 
-addAthorButton.addEventListener('click', addAuthor);
+UI.AUTHOR_BTN.addEventListener('click', addAuthor);

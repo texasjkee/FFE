@@ -1,43 +1,53 @@
 const UI = {
   PREVIOUS: document.querySelector('.previous-button'),
   NEXT: document.querySelector('.next-button'),
-  AUTHOR: document.querySelector('.author'),
-  ARTICLE: document.querySelector('.article'),
+  ARTICLE_AUTHOR: document.querySelector('.article-author'),
+  ARTICLE_TITLE: document.querySelector('.article-title'),
   ARTICLE_BODY: document.querySelector('.article-body'),
 }
 
-const render = (article) => {
+const renderArticles = (article) => {
   UI.AUTHOR.textContent = article.author;
-  UI.ARTICLE.textContent = article.title;
+  UI.ARTICLE_TITLE.textContent = article.title;
   UI.ARTICLE_BODY.textContent = article.body;
-}
+};
 
-UI.PREVIOUS.addEventListener('click', () => console.log('previous'));
-UI.NEXT.addEventListener('click', () => console.log('next'));
+const frontArticles = [];
 
 (async () => {
   const articles = await axios.get('/articles');
-  articles.data.forEach(article => console.log(article));
+
   if (articles) {
-    const firstArticle = articles.data[0];
 
-    const author = await axios.get(`/author/${firstArticle.authorId}`);
-
-    render({
-      title: firstArticle.title,
-      body: firstArticle.body,
-      author: author.data.name
+    articles.data.forEach(async article => {
+      const author = await axios.get(`/author/${article.authorId}`);
+      frontArticles.push({ 
+        title: article.title, 
+        body: article.body, 
+        author: author.data.name 
+      });
+      renderArticles(frontArticles[0]);
     });
-    }; 
+  }; 
 })();
-  // if (articles) {
-  //   articles.data.forEach(async article => {
-  //     const author = await axios.get(`/author/${article.authorId}`);
 
-  //     render({
-  //       title: article.title,
-  //       body: article.body,
-  //       author: author.data.name
-  //     });
-  //   }); 
-  // };
+const move = async (action) => {
+  if (action === 'next') {
+    const foundArticle = frontArticles.find(article => article.title === UI.ARTICLE_TITLE.textContent);
+    const foundIndex = frontArticles.indexOf(foundArticle) + 1;
+
+    const result = foundIndex === frontArticles.length ? frontArticles[0] : frontArticles[foundIndex]; 
+    renderArticles(result);
+  }; 
+
+  if (action === 'previous') {
+    const foundArticle = frontArticles.find(arr => arr.title ===  UI.ARTICLE_TITLE.textContent);
+    const foundIndex = frontArticles.indexOf(foundArticle);
+
+    const result = foundIndex === 0 ? frontArticles[frontArticles.length -1] : frontArticles[foundIndex - 1]; 
+    renderArticles(result);
+  };
+};
+
+UI.NEXT.addEventListener('click', () => move('next'));
+UI.PREVIOUS.addEventListener('click', () => move('previous'));
