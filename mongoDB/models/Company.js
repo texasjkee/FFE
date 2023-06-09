@@ -10,6 +10,6 @@ const company = mongoose.Schema({
     since: { type: Number, required: false },
 });
 
-const companySchema = mongoose.model('Company', company);
+// const companySchema = mongoose.model('Company', company);
 
-module.exports = companySchema;
+// module.exports = companySchema;
