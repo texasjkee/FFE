@@ -8,7 +8,7 @@ const authorRoute = require('./router/authorRoute');
 const articleRoute = require('./router/articleRoute');
 const viewArticleRoute = require('./router/viewArticleRoute');
 
-//Middleware.
+//Middleware
 server.use(express.json());
 
 //Static
@@ -20,11 +20,6 @@ server.set('view engine', 'ejs');
 server.set('views', __dirname + '/views');
 
 //Render
-
-server.get('/',(req, res) => {
-  res.render('index');
-})
-
 server.get('/author',(req, res) => {
   res.render('author');
 })
@@ -37,8 +32,7 @@ server.get('/viewArticle',(req, res) => {
   res.render('viewArticle');
 })
 
-//Router.
-
+//Router
 server.use(authorRoute);
 server.use(articleRoute);
 server.use(viewArticleRoute);
