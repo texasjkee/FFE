@@ -2,6 +2,7 @@ const UI = {
   ARTICLE_BODY: document.querySelector('.article-body'),
   ARTICLE_TITLE: document.querySelector('.article-title'),
   ARTICLE_FORM: document.getElementById('arcticle-form'),
+  AUTHOR_SELECT: document.querySelector('.author'),
   SAVE_BTN: document.querySelector('.save-article__button')
 };
 
@@ -13,17 +14,13 @@ const clearArcticleValue = () => {
 };
 
 const renderAuthor = (author) => {
-  const creater = document.querySelector('.invisibleDiv');
-  const div = document.createElement('div');
-  div.className = 'author-item';
-  div.id = author._id;
-  div.textContent = author.name;
+  const option = document.createElement('option');
+  option.className = 'author-item';
+  option.value = author._id;
+  option.textContent = author.name;
   
-  creater.append(div);
-
-  const autorItems = document.querySelectorAll('.author-item');
-  autorItems.forEach(autor => autor.addEventListener('click',(e) => chooseAuthor(e)));
-}
+  UI.AUTHOR_SELECT.append(option);
+};
 
 (async () => {
   const authors = await axios.get('/authors');
@@ -49,4 +46,5 @@ const addArticle = async (e) => {
   };
 };
 
+UI.AUTHOR_SELECT.addEventListener('change', (e) => authorId = e.target.value);
 UI.ARTICLE_FORM.addEventListener('submit', addArticle);
