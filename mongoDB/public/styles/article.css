@@ -1,33 +1,36 @@
-body {
-  /* background-color: aqua; */
-}
-
-.author-item {
-  /* background-color: green; */
-  cursor: pointer;
-}
-
 *{
   font-size: 16px;
 }
 
+.posts-wrapper {
+  margin: 0 auto;
+  width: 750px;
+  padding: 4px 20px 0 20px;
+  border-bottom: 2px solid #f2f1f1;
+}
+
+.navigation {
+  width: 400px;  
+  margin: 0 auto;
+}
+
+.author__list {
+  display: flex;
+}
+
 ul {
-  padding-inline-start: 20px;
+  list-style: none;
 }
 
-#post-form {
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
+a {
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-.search-input{
-  width: 500px;
-  height: 30px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+a:hover {
+  cursor: pointer;
+  color: #028658;
 }
 
 textarea {
@@ -42,11 +45,6 @@ textarea {
   resize: none;
 }
 
-.post-title {
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
-
 .form-info {
   margin-bottom: 10px;  
 }
@@ -57,10 +55,6 @@ textarea {
 
 .search-input {
   margin-bottom: 20px;
-}
-
-.post-body__input {
-  font-size: 20px;
 }
 
 .title-post {
@@ -89,83 +83,43 @@ textarea {
   border-bottom: 5px solid transparent;
 }
 
-.hashtag-list__post {
-  /* background-color: aqua;  */
-  /* width: 150px; */
-  color: #019863;
-}
-
-.hashtag-list__iteam {
-  margin-right: 5px;
-}
-
 .hashtag-list__iteam:hover {
   cursor: pointer;
   color: #019863;
 }
 
-.active {
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  background-color: #04d28a;
+form {
+  width: 100%;
 }
 
-.form-info {
-  margin-bottom: 10px;  
+input {
+  width: 742px;
 }
 
-.form-text {
-  margin-bottom: 10px;  
-}
-
-.search-input {
-  margin-bottom: 20px;
-}
-
-.post-body__input {
-  font-size: 20px;
-}
-
-.title-post {
-  width: 200px;
-  margin-bottom: 3px;
-}
-
-.title-post:hover{
- cursor: pointer; 
-}
-
-.hashtag-list {
-  display: flex;
-  list-style: none;
-  border-bottom: 5px solid transparent;
-}
-
-.hashtag-list__iteam {
-  margin-right: 10px;
-}
-
-.hashtag-list__iteam:hover {
-  cursor: pointer;
-  color: #028658;
-}
-
-.post-wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 450px;
+.posts-wrapper {
+  margin: 0 auto;
+  width: 750px;
   padding: 4px 20px 0 20px;
   border-bottom: 2px solid #f2f1f1;
-  margin-bottom: 5px;
 }
 
-.post-wrapper:hover {
-  color: #058b5cc1;
-  cursor: pointer;
+.navigation {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 90px;
 }
 
-.save-post__button {
+.author__list {
+  display: flex;
+}
+
+.author__list-item.author__list-item {
+  margin-left: 5px;
+}
+
+.save-article__button {
   display: inline-block;
+  width: 100px;
   border: none;
   padding: 1rem 2rem;
   margin: 0;
@@ -186,28 +140,4 @@ textarea {
 
 .invisibleDiv {
   width: 200px;
-}
-
-.active-tag {
-  padding: 2px;
-  border: 1px solid black;
-  border-radius: 2px;
-  background-color: #019863;
-}
-
-.active-tag:hover {
-  color: black;
-}
-
-.active:hover {
-  color: black;
-}
-
-.show {
-  display: block;
-  color: black;
-}
-
-.hidden {
-  display: none;
 }

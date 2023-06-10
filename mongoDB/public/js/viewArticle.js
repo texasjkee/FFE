@@ -7,7 +7,7 @@ const UI = {
 }
 
 const renderArticles = (article) => {
-  UI.AUTHOR.textContent = article.author;
+  UI.ARTICLE_AUTHOR.textContent = article.author;
   UI.ARTICLE_TITLE.textContent = article.title;
   UI.ARTICLE_BODY.textContent = article.body;
 };
@@ -16,17 +16,15 @@ const frontArticles = [];
 
 (async () => {
   const articles = await axios.get('/articles');
-
   if (articles) {
-
-    articles.data.forEach(async article => {
-      const author = await axios.get(`/author/${article.authorId}`);
-      frontArticles.push({ 
-        title: article.title, 
-        body: article.body, 
-        author: author.data.name 
-      });
-      renderArticles(frontArticles[0]);
+      articles.data.forEach(async article => {
+        const author = await axios.get(`/author/${article.authorId}`);
+        frontArticles.push({ 
+          title: article.title, 
+          body: article.body, 
+          author: author.data.name 
+        });
+        renderArticles(frontArticles[0]);
     });
   }; 
 })();
