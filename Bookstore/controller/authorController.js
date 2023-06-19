@@ -22,9 +22,8 @@ exports.createNewAuthor = async (req, res, next) => {
 };
 
 exports.getAuthorById = async (req, res, next) => {
-    console.log(req.params.id);
     try {
-        await authorModel.find({_id: req.params.id}).populate([{ path: 'book', strictPopulate: false }]);
+        await authorModel.find({_id: req.params.id}).populate();
         res.status(201).json(req.body);
     } catch (error) {
         console.log(error);

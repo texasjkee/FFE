@@ -1,7 +1,7 @@
 const { Schema, Types, model} = require('mongoose'); 
 
 const author = Schema({
-    name: { type: String, required: true },
+    name: String,
     books: { type: Types.ObjectId, ref: "Book"},
 });
 
