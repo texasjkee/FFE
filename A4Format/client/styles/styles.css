@@ -68,6 +68,7 @@ body{
 }
 /* shift button */
 .side-controls-shifter{
+    cursor: pointer;
     position: absolute;
     right: 20px;
     top: 177px;
@@ -88,7 +89,7 @@ body{
 .side-control-page-2{
     position: absolute;
     right: 20px;
-    bottom: 116px;
+    bottom: 220px;
     user-select: none;
     width: 267px;
 }
@@ -133,7 +134,8 @@ body{
 .side-control-page-2{
     top: 205px;
 }
-.side-control-page-2 .aspect{
+.side-control-page-2 .aspect li{
+    cursor: pointer;
     margin-left: 2px;
 }
 .side-control-page-2 .aspect span{
@@ -157,11 +159,10 @@ body{
     display: inline-block;
     position: absolute;
     bottom: 0px;
-    border-right: 1px solid rgba(255, 255, 255, 0.239);
     margin-left: 250px;
 }
 .action-button .upload,
-.action-button .download{
+.action-button .send{
     display: block;
     width: 170px;
     height: 35px;
