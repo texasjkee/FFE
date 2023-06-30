@@ -1,13 +1,14 @@
 const photoModel = require('../models/Photo');
 
 const addPhoto = async (req, res, next) => {
-  const {format, quantity, created} = JSON.parse(req.body.info);
+  const {format, quantity, created, originalName} = JSON.parse(req.body.info);
   const imageName = req.file.path;
 
   const data = {
+    originalName,
     imageName,
-    format,
     quantity,
+    format,
     created
   };
 

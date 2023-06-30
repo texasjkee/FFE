@@ -1,5 +1,5 @@
 export const UI = {
-  FORMATS: document.querySelectorAll('input[name=format]'),
+  FORMATS: document.querySelectorAll('.format'),
   QUANTITY: document.querySelector('.quantity'),
   MINUS_BTN: document.querySelector('.minus'),
   PLUS_BTN: document.querySelector('.plus'),
