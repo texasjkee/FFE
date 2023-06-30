@@ -1,4 +1,5 @@
 import {UI} from './UI.js';
+import { returnDefaultValueOnPage } from './returnDefValue.js';
 
 export const cropPhoto = () => {
   document.querySelector('.image-workspace').innerHTML = `<img src="" alt="">`
@@ -57,7 +58,9 @@ export const cropPhoto = () => {
             data.append('photo', blob);
             data.append('info', JSON.stringify(info));
 
-            await  axios.post('/addPhoto', data);
+            // await  axios.post('/addPhoto', data);
+            
+            returnDefaultValueOnPage();
 
             UI.ACTION_BUTTON[1].innerText = 'Send';
             
