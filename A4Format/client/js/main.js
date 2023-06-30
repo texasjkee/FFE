@@ -1,19 +1,9 @@
 import {UI} from './modules/UI.js';
+import {changePage} from './modules/changePage.js';
 
 const addition = () => UI.QUANTITY.value = Number(UI.QUANTITY.value) + 1;
 const subtraction = () => UI.QUANTITY.value = Number(UI.QUANTITY.value) - 1;
 const uploadPhoto = () => UI.HIDDEN_UPLOAD.click();
-
-const changePage = (e) => {
-  if(e.target.id === 'pageOne') {
-    UI.SIDE_CONTROL_PAGE_1.style.display = 'block';
-    UI.SIDE_CONTROL_PAGE_2.style.display = 'none';
-  } else {
-    UI.SIDE_CONTROL_PAGE_1.style.display = 'none';
-    UI.SIDE_CONTROL_PAGE_2.style.display = 'block';
-  }
-  UI.SIDE_CONTROLS_BTNS.forEach(el => el.classList.toggle('active'));
-};
 
 const chooseFormat = () => {
   UI.FORMATS.forEach(format  => {
