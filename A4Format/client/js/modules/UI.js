@@ -6,7 +6,7 @@ export const UI = {
   SEND_BTN: document.querySelector('.send'),
   UPLOAD_BTN: document.querySelector('.upload'),
   HIDDEN_UPLOAD: document.querySelector('.hidden-upload'),
-  SIDE_CONTROLS_SHIFTER: document.querySelectorAll('.side-controls-shifter svg'),
+  SIDE_CONTROLS_BTNS: document.querySelectorAll('.side-controls-shifter svg'),
   SIDE_CONTROL_PAGE_1: document.querySelector('.side-control-page-1'),
   SIDE_CONTROL_PAGE_2: document.querySelector('.side-control-page-2'),
   ACTION_BUTTON: document.querySelectorAll('.action-button button'),

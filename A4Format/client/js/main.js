@@ -4,6 +4,17 @@ const addition = () => UI.QUANTITY.value = Number(UI.QUANTITY.value) + 1;
 const subtraction = () => UI.QUANTITY.value = Number(UI.QUANTITY.value) - 1;
 const uploadPhoto = () => UI.HIDDEN_UPLOAD.click();
 
+const changePage = (e) => {
+  if(e.target.id === 'pageOne') {
+    UI.SIDE_CONTROL_PAGE_1.style.display = 'block';
+    UI.SIDE_CONTROL_PAGE_2.style.display = 'none';
+  } else {
+    UI.SIDE_CONTROL_PAGE_1.style.display = 'none';
+    UI.SIDE_CONTROL_PAGE_2.style.display = 'block';
+  }
+  UI.SIDE_CONTROLS_BTNS.forEach(el => el.classList.toggle('active'));
+};
+
 const chooseFormat = () => {
   UI.FORMATS.forEach(format  => {
     format.addEventListener('click', (e) => {
@@ -12,6 +23,7 @@ const chooseFormat = () => {
     });
   });
 };
+
 chooseFormat();
 
 const returnDefaultValue = () => {
@@ -96,18 +108,5 @@ UI.MINUS_BTN.addEventListener('click', () => {
 UI.PLUS_BTN.addEventListener('click', addition);
 UI.UPLOAD_BTN.addEventListener('click', uploadPhoto);
 UI.HIDDEN_UPLOAD.addEventListener('change', cropPhoto);
-
-//TODO: rewrite in one function
-UI.SIDE_CONTROLS_SHIFTER[0].onclick = () => {
-  UI.SIDE_CONTROL_PAGE_1.style.display = 'block'
-  UI.SIDE_CONTROL_PAGE_2.style.display = 'none'
-  UI.SIDE_CONTROLS_SHIFTER[0].classList.add('active')
-  UI.SIDE_CONTROLS_SHIFTER[1].classList.remove('active')
-};
-
-UI.SIDE_CONTROLS_SHIFTER[1].onclick = () => {
-  UI.SIDE_CONTROL_PAGE_1.style.display = 'none'
-  UI.SIDE_CONTROL_PAGE_2.style.display = 'block'
-  UI.SIDE_CONTROLS_SHIFTER[0].classList.remove('active')
-  UI.SIDE_CONTROLS_SHIFTER[1].classList.add('active')
-};
+UI.SIDE_CONTROLS_BTNS[0].addEventListener('click', (e) => changePage(e));
+UI.SIDE_CONTROLS_BTNS[1].addEventListener('click', (e) => changePage(e));
