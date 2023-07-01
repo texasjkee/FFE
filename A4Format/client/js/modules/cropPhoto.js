@@ -58,14 +58,11 @@ export const cropPhoto = () => {
             data.append('photo', blob);
             data.append('info', JSON.stringify(info));
 
-            // await  axios.post('/addPhoto', data);
+            await  axios.post('/addPhoto', data);
             
             returnDefaultValueOnPage();
 
             UI.ACTION_BUTTON[1].innerText = 'Send';
-            
-            //TODO: clear imageWorkspace
-            // imageWorkspace.src = '';
           });
       };
     }
