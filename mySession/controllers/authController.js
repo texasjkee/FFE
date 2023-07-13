@@ -17,16 +17,16 @@ const registration = async (req, res, next) => {
   };
 };
 
-const authorization = async (req, res, next) => {
+const login = async (req, res, next) => {
   const {username, password} = req.body;
 
   try {
     const found = await userModel.find({username: req.body.username});
-    const {username: userName, password: userPassword} = found[0] ? 
-      found[0] : [{username: null, password: null}];
+    const {username: userName, password: userPassword, _id} = found[0] ? 
+      found[0] : [{username: null, password: null, _id: null}];
     
     if (username === userName && password === userPassword) {
-      console.log('welcome')
+      req.session.userId = _id;
       return res.status(200).json({message: 'Welcome'});
     } else {
       return res.status(400).json({message: `Wrong password  or login entered`});
@@ -37,4 +37,4 @@ const authorization = async (req, res, next) => {
   };
 };
 
-module.exports = {registration, authorization};
+module.exports = {registration, login};
