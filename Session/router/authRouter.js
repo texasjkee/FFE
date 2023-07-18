@@ -1,9 +1,18 @@
 const {Router} = require('express');
 const route = Router();
 
-route.post('/login', async (req, res) => {
+const authController = require('../controllers/authController');
+
+route.get('/login', async (req, res) => {
+  //? What is the difference? 
+  // req.session.isAuth = true;
   req.session.isAunthenticated = true;
-  res.redirect('/');
+  res.send('Hello');
+  //? What is this? 
+  // res.redirect('/');
 });
+
+route.post('/register', authController.register);
+route.post('/login', authController.login);
 
 module.exports = route;
