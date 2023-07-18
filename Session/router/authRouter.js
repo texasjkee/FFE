@@ -12,7 +12,7 @@ route.get('/login', async (req, res) => {
   // res.redirect('/');
 });
 
-route.post('/register', authController.register);
+route.post('/registration', authController.registration);
 route.post('/login', authController.login);
 
 module.exports = route;

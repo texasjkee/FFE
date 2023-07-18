@@ -1,7 +1,7 @@
 const bcryptjs = require('bcryptjs');
 const userModel = require('../models/User');
 
-const register = async (req, res, next) => {
+const registration = async (req, res, next) => {
   const {username, email, password} = req.body;
   let user = await userModel.findOne({email});
   
@@ -27,4 +27,4 @@ const login = (req, res, next) => {
   const {username, email, password} = req.body;
 };
 
-module.exports = {register, login};
+module.exports = {registration, login};
