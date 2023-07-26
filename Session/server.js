@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const server = express();
 
-const authRouter = require('./router/authRouter');
+const authRouter = require('./router/auth/');
 
 const mongoURI = 'mongodb://127.0.0.1:27017/session';
 
@@ -23,7 +23,6 @@ server.use(session({
   store
 }));
 
-// server.use(isAuthMiddleware);
 server.use('/auth', authRouter);
 
 server.listen(PORT, () => console.log(`Server running on ${PORT}`));
