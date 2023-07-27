@@ -1,14 +1,15 @@
+require('dotenv').config();
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 const express = require('express');
 const server = express();
 
-const authRouter = require('./router/auth/');
+const authRouter = require('./router/auth');
 
 const mongoURI = 'mongodb://127.0.0.1:27017/session';
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const store = new MongoDBSession({
   uri: mongoURI,
@@ -16,6 +17,11 @@ const store = new MongoDBSession({
 });
 
 server.use(express.json());
+server.use(express.static('public'));
+
+server.set('view engine', 'ejs');
+server.set('views', __dirname + '/views');
+
 server.use(session({
   secret: 'secret_key',
   resave: false, 

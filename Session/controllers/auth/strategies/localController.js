@@ -1,46 +1,66 @@
 const bcryptjs = require('bcryptjs');
-const userModel = require('../../../models/User');
+
+const AuthModel = require('../../../models/Auth');
+const userController = require('./userController');
+
+const addStrategy = async (uId, authData) => {
+  const hashedPwd = bcryptjs(authData.password, 5);
+  
+  const doc = new AuthModel();
+  doc.user = uId;
+  doc.provider = 'local';
+  doc.authData = {...authData, password: hashedPwd};
+
+  await doc.save();
+  
+  return doc.id;
+};
 
 const registration = async (req, res) => {
   const {username, email, password} = req.body;
-  let user = await userModel.findOne({email});
+
+  const auth = await AuthModel
+    .findOne({provider: 'local', 'authData.username': username})
+    .populate('User');
   
-  if(user) {
-    return res.redirect('/register');
-  };
- 
+    if (!auth) {
+      return res.status(301).json({message: 'Invalid login'});
+    };
+
+    if (auth.authData.pwd !== password) {
+      return res.status(301).json({message: 'Invalid password'});
+    };
+  
   const hashedPsw = await bcryptjs.hash(password, 5);
   
-  user = new userModel({ 
-    username, 
-    email, 
-    password: hashedPsw 
+  const user = new AuthModel({
+    authData:{
+      username, 
+      email, 
+      password: hashedPsw 
+    } 
   });
   
   await user.save();
   
-  // res.redirect('/login');
-  res.status(200).json({message: 'You are registerd'});
+  res.status(201).json({message: 'You are registerd'});
 };
 
 const login = async (req, res) => {
   const {email, password} = req.body;
 
-  const user = await userModel.findOne({email})
+  const user = await AuthModel.findOne({email})
   
   if (!user) {
-    // return res.redirect('/login');
     res.status(200).json({message: 'username or password is not correct'});
   };
  
   const isMatch = await bcryptjs.compare(password, user.password);
   
   if (!isMatch) {
-    // return res.redirect('/login');
     res.status(200).json({message: 'username or password is not correct'});
   };
   
-  // res.redirect('/dashboard');
   req.session.isAunthenticated = true;
   res.status(200).json({message: 'You are logged in'});
 };
@@ -48,7 +68,6 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   req.session.destroy(err => {
     if (err) throw err;
-    // res.redirect('/');
   });
   res.status(200).json({message: 'You are logout'})
 };

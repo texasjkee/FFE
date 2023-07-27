@@ -1,14 +1,9 @@
 const {Router} = require('express');
 const route = Router();
 
-const authController = require('../../controllers/auth/strategies/localController');
-const isAuthMiddleware = require('../../middleware/isAuth');
+const googleController = require('../../controllers/auth/strategies/googleController');
 
-// route.post('/registration', authController.registration);
-// route.post('/login', authController.login);
-// route.post('/logout', authController.logout);
-// route.get('/dashboard', isAuthMiddleware, (req, res) => {
-//   res.send('dashboard');
-// });
+route.post('/login', googleController.login);
+route.post('/logout', googleController.logout);
 
 module.exports = route;
