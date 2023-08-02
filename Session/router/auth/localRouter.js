@@ -7,6 +7,8 @@ const isAuthMiddleware = require('../../middleware/isAuth');
 route.post('/registration', localStrategy.registration);
 route.post('/login', localStrategy.login);
 route.post('/logout', localStrategy.logout);
+
+//? extract to separate route
 route.get('/dashboard', isAuthMiddleware, (req, res) => {
   // res.render('dashboard');
 });
