@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const server = express();
-
+const morgan = morgan('morgan');
 const authorRoute = require('./router/authorRoute');
 const bookRoute = require('./router/bookRoute');
+const postRoute = require('./router/postRoute');
 
 const PORT = 3333;
 
@@ -11,6 +12,7 @@ server.use(express.json());
 server.use(express.static('public'));
 
 server.use(authorRoute);
+server.use(postRoute);
 server.use(bookRoute);
 
 server.set('view engine', 'ejs');
