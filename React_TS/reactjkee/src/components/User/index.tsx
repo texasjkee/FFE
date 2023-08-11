@@ -11,6 +11,7 @@ type AuthUser = {
 
 const User = () => {
   const [user, setUser] = useState <AuthUser | null>(null);
+  // const [user, setUser] = useState <AuthUser>({} as AuthUser);
   const handleLogin = () => {
     setUser({
       name: "John",
