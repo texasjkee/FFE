@@ -1,0 +1,13 @@
+.button {
+  width: 60px;
+  height: 20px;
+  background-color: green;
+};
+
+.nav span {
+  color: white; 
+}
+
+.nav.active {
+  color: gold;
+}

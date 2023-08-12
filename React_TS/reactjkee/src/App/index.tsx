@@ -1,57 +1,43 @@
-import './App.css';
 import User from '../components/User';
 import CostItem from '../components/CostItem';
 
-function App() {
-  
-  // const costs: {date: Date, description: string, amount: number}[] = [
-  //   {
-  //     date: new Date(),
-  //     description: "MacBook",
-  //     amount: 1238
-  //   },
-  //   {
-  //     date: new Date(),
-  //     description: "Hewlett-Packard",
-  //     amount: 818
-  //   },
-  //   {
-  //     date: new Date(),
-  //     description: "ThinkPad",
-  //     amount: 908
-  //   },
-  // ];
- 
- type CostType = {
-  date: string,
-  // description: string,
-  // amount: number
- };
+import './App.css';
 
-  const costs: Array <CostType> = [
-    {
-      date: 'wow', 
-      // description: "MacBook",
-      // amount: 1238
-    },
-    // {
-    //   date: new Date(),
-    //   description: "Hewlett-Packard",
-    //   amount: 818
-    // },
-    // {
-    //   date: new Date(),
-    //   description: "ThinkPad",
-    //   amount: 908
-    // },
-  ];
-  const str: string = "wow";
+const user = {
+  email: "john.doe@kindacode.com",
+};
 
+const costData: {description: string, cost: number}[] = [
+  {
+    description: "MacBook",
+    cost: 1800,
+  },
+  {
+    description: "Asus",
+    cost: 900,
+  },
+  {
+    description: "ThinkPad",
+    cost: 1100,
+  },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      {/* <CostItem yo={str}/> */}
-      <CostItem/>
-      <User/>
+    <div>
+      <CostItem 
+        description={costData[0].description}
+        cost={costData[0].cost}
+      />
+      <CostItem 
+        description={costData[1].description}
+        cost={costData[1].cost}
+      />
+      <CostItem 
+        description={costData[1].description}
+        cost={costData[1].cost}
+      />
+      <User email={user.email}/>
     </div>
   );
 };

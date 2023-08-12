@@ -1,10 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import styles from './CostItem.module.css';
 
-const CostItem: React.FC = () => {
+type CostProps = {
+  description: string,
+  cost:number,
+};
+
+const CostItem = (props: CostProps) => {
   return (
-    <div className="">
-      <h1>CostItem</h1>
+    <div className={styles.cost_item}>
+      <span>{props.description}</span>
+      <span>{props.cost}</span>
     </div>
   );
 };

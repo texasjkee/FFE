@@ -1,5 +1,5 @@
-import { useState } from "react";
-import './User.css'
+import React, { useState } from "react";
+import styles from './User.module.css'
 
 type AuthUser = {
   name: string,
@@ -9,9 +9,13 @@ type AuthUser = {
   adress?: string
 };
 
-const User = () => {
+interface UserProps {
+  email: string;
+};
+
+const User = (props: UserProps) => {
   const [user, setUser] = useState <AuthUser | null>(null);
-  // const [user, setUser] = useState <AuthUser>({} as AuthUser);
+
   const handleLogin = () => {
     setUser({
       name: "John",
@@ -21,13 +25,17 @@ const User = () => {
     });
   };
   const handleLoggout = () => { setUser(null)};
-  
+ 
   return(
     <div className="none">
-      <button onClick={handleLogin}>Login</button>      
-      <button onClick={handleLoggout}>Logout</button>      
-      <div>User is {user?.name} </div>
-      <div>User is {user?.email} </div>
+      <button className={styles.button} onClick={handleLogin}>Login</button>      
+      <button className={styles.button} onClick={handleLoggout}>Logout</button>      
+      <div className={styles.nav}> 
+        <span>User is {user?.name}</span>
+      </div>
+      <div className={styles.nav}>
+        <span>User is {user?.email}</span>
+      </div>
     </div>
   );
 };
