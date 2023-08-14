@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from './CostItem.module.css';
 
 type CostProps = {
@@ -6,11 +6,18 @@ type CostProps = {
   cost:number,
 };
 
-const CostItem = (props: CostProps) => {
+const CostItem: React.FC <CostProps> = (props: CostProps) => {
+
+  const [description, setDescription] = useState(props.description);
+  const changeDescriptionHandler = () => {
+    setDescription('Yo');
+  };
+
   return (
     <div className={styles.cost_item}>
-      <span>{props.description}</span>
+      <span>{description}</span>
       <span>{props.cost}</span>
+      <button onClick={changeDescriptionHandler}>Click</button>
     </div>
   );
 };
