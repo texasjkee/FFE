@@ -28,14 +28,14 @@ const User = (props: UserProps) => {
  
   return(
     <div className="none">
-      <button className={styles.button} onClick={handleLogin}>Login</button>      
+      {/* <button className={styles.button} onClick={handleLogin}>Login</button>      
       <button className={styles.button} onClick={handleLoggout}>Logout</button>      
       <div className={styles.nav}> 
         <span>User is {user?.name}</span>
       </div>
       <div className={styles.nav}>
         <span>User is {user?.email}</span>
-      </div>
+      </div> */}
     </div>
   );
 };
