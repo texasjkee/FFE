@@ -1,5 +1,5 @@
 import {FC, useState, useEffect} from "react";
-import axios from "axios";
+import axios from "../../axios";
 
 import Skeleton from "../Skeleton";
 
@@ -21,8 +21,7 @@ const Hero: FC <HeroProps> = (props: HeroProps) => {
   useEffect(() =>  {
     const run = async (pageNumber: number) => {
       // console.log(pageNumber, 'pageNumber')
-      const foundHero = await axios.get(`https://swapi.dev/api/people/${pageNumber}/`);
-
+      const foundHero = await axios.get(`/hero/${pageNumber}`);
       setHero({
         name: foundHero.data.name,
         gender: foundHero.data.gender,
