@@ -1,16 +1,13 @@
-import Hero from '../components/Hero';
-
+import HeroCard from '../components/HeroCard';
 import './App.css';
 
 const App: React.FC = () => {
-  const HERO_LIMIT_ON_PAGE: number = 10;
-  const numberOfHeroes: number[] = [];
-
-  for(let i = 1; i <= HERO_LIMIT_ON_PAGE; i++) numberOfHeroes.push(i);
+  const HERO_LIMIT: number = 16;
 
   return (
     <>
-      {numberOfHeroes.map((number, _) => <Hero key ={_} pageNumber={number}/>)} 
+    {Array.from({length: HERO_LIMIT}, (_, index) => index + 1) 
+       .map((number, index) => <HeroCard key={index} pageNumber={number}/>)}
     </>
   );
 };
