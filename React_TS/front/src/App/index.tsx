@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import HeroCard from '../components/HeroCard';
 import './App.css';
 
 const App: React.FC = () => {
-  const HERO_LIMIT: number = 16;
+  const [pageNumber, setPageNumber] = useState<string>('1');
 
+  console.log(pageNumber, 'Render')
   return (
     <>
-    {Array.from({length: HERO_LIMIT}, (_, index) => index + 1) 
-       .map((number, index) => <HeroCard key={index} pageNumber={number}/>)}
+      <HeroCard pageNumber={pageNumber} setPageNumber={setPageNumber} />
     </>
   );
 };

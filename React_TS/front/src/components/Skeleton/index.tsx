@@ -10,9 +10,9 @@ const Skeleton = () => (
     backgroundColor="#ed9b0c"
     foregroundColor="#ecebeb"
   >
-    <rect x="27" y="2" rx="3" ry="3" width="213" height="14" /> 
-    <rect x="27" y="31" rx="3" ry="3" width="213" height="14" /> 
-    <rect x="27" y="60" rx="3" ry="3" width="213" height="14" />
+    <rect x="35" y="13" rx="3" ry="3" width="194" height="14" /> 
+    <rect x="35" y="40" rx="3" ry="3" width="121" height="14" /> 
+    <rect x="35" y="68" rx="3" ry="3" width="103" height="14" />
   </ContentLoader>
 )
 
