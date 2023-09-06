@@ -2,9 +2,12 @@ import {FC, ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'reac
 
 import style from './HeroForm.module.css';
 
-type HeroFormProps = { setPageNumber: Dispatch<SetStateAction<string>> };
+type HeroFormProps = {
+   loading: boolean;
+   setPageNumber: Dispatch<SetStateAction<string>> 
+};
 
-const HeroForm: FC<HeroFormProps> = ({setPageNumber}) => {
+const HeroForm: FC<HeroFormProps> = ({loading, setPageNumber}) => {
   const [value, setValue] = useState<string>('');
   // const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,10 +18,11 @@ const HeroForm: FC<HeroFormProps> = ({setPageNumber}) => {
     setValue(e.target.value)
     // clearInputValue();
   };
-
+  
   return (
     <div className={style.form}>
-      <input type="number" value={value} onChange={(e) => getInputValue(e)}/>      
+      {loading ? <input type ="number" readOnly/> :
+        <input type="number" value={value} onChange={(e) => getInputValue(e)}/>}      
     </div>
   );
 };

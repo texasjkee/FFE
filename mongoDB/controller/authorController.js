@@ -11,7 +11,7 @@ exports.createNewAuthor = async (req, res, next) => {
 };
 
 exports.getAllAuthors = async (req, res, next) => {
-    try{
+    try {
         const authors = await authorModel.find({});
         res.status(200).json(authors);
     } catch (error) {
@@ -22,7 +22,7 @@ exports.getAllAuthors = async (req, res, next) => {
 
 exports.getAuthorById = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const author = await authorModel.findById(id);
         res.status(200).json(author);
     } catch (error) {

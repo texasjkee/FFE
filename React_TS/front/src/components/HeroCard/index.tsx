@@ -48,7 +48,7 @@ const HeroCard: FC <HeroProps> = ({pageNumber, setPageNumber}) => {
       <div className={styles.hero}>
         {isLoading ? <Skeleton/> : <h2>{hero?.name}</h2>}
         <HeroItem loading={isLoading} height={hero?.height} gender={hero?.gender}/>
-        <HeroForm setPageNumber={setPageNumber}/>
+        <HeroForm loading ={isLoading}setPageNumber={setPageNumber}/>
       </div>
     </div>
   );
